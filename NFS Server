@@ -35,3 +35,5 @@ df -h
 umount /mnt
 
 Agora você pode escrever no seu NFS volume em /mnt
+
+
