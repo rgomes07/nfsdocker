@@ -1,0 +1,33 @@
+
+Docker Swarm Persistente storage com NFS
+
+Instalação Netshare Docker Volume Driver
+
+wget https://github.com/ContainX/docker-volume-netshare/releases/download/v0.36/docker-volume-netshare_0.36_amd64.deb
+dpkg -i docker-volume-netshare_0.36_amd64.deb
+service docker-volume-netshare start
+
+Exemplo de uma aplicação com dados persistentes via nfs:
+
+version: "3.7"
+services:
+  web:
+    image: nginx
+    volumes:
+      - nginx.vol:/usr/share/nginx/html
+    ports:
+      - 80:80
+    networks:
+      - web
+
+networks:
+  web:
+    driver: overlay
+    name: web
+
+volumes:
+  nginx.vol:
+    driver: nfs
+    driver_opts:
+      share: 192.168.200.245:/var/storage/nginx
+
