@@ -30,4 +30,7 @@ volumes:
     driver: nfs
     driver_opts:
       share: 192.168.200.245:/var/storage/nginx
+      
+      
+docker stack deploy -c docker-compose.yml app
 
