@@ -34,13 +34,6 @@ mount 192.168.200.245:/var/storage /mnt
 df -h
 umount /mnt
 
-Agora você escrever no seu NFS volume em /mnt
-
-
-
-
-
-
-
+Agora você pode escrever no seu NFS volume em /mnt
 
 
