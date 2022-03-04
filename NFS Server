@@ -1,0 +1,46 @@
+
+Instalação e Configuração do Servidor NFS Server (Network File System) 
+
+Neste projeto iremos adotar o IP 192.168.200.245, como nosso servidor master.docker.com (swarm)
+
+apt update && sudo apt upgrade -y 
+apt-get install nfs-kernel-server nfs-common -y
+
+Crie o diretório para NFS e atribua as configurações:
+
+mkdir /var/storage
+chown -R nobody:nogroup /var/storage
+
+Permitir acesso para os clientes (/etc/exports):
+
+echo '/var/storage 192.168.200.0/24(rw,sync,no_root_squash,no_subtree_check)' > /etc/exports
+
+Iniciando o NFS Server
+
+systemctl restart nfs-kernel-server
+systemctl enable nfs-kernel-server
+
+Configuração dos nodes clientes:
+
+Devemos efetuar a instalação do nfs-common em todos os nodes clientes.
+
+apt-get install nfs-common -y
+
+Testando o ponto de montagem do NFS:
+
+showmount -e 192.168.200.245
+
+mount 192.168.200.245:/var/storage /mnt
+df -h
+umount /mnt
+
+Agora você escrever no seu NFS volume em /mnt
+
+
+
+
+
+
+
+
+
